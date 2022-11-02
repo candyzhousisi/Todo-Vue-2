@@ -1,72 +1,59 @@
+im
+
 <template>
   <section class="todoapp">
-    <!-- 头部 -->
-    <header class="header">
-      <h1>todos</h1>
-      <input class="new-todo" placeholder="What needs to be done?" autofocus />
-    </header>
-
-    <!-- 主体 -->
-    <section class="main">
-      <input id="toggle-all" class="toggle-all" type="checkbox" />
-      <label for="toggle-all">Mark all as complete</label>
-      <ul class="todo-list">
-        <!-- These are here just to show the structure of the list items -->
-        <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-        <li class="completed editing">
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" type="text" />
-        </li>
-        <li>
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Rule the web" />
-        </li>
-      </ul>
-    </section>
-
-    <!-- 底部 -->
-    <footer class="footer">
-      <!-- 剩余完成数 -->
-      <span class="todo-count"><strong>0</strong> item left</span>
-      <!-- 过滤是否完成任务 -->
-      <ul class="filters">
-        <li>
-          <a class="selected" href="#/all">All</a>
-        </li>
-        <li>
-          <a href="#/active">Active</a>
-        </li>
-        <li>
-          <a href="#/completed">Completed</a>
-        </li>
-      </ul>
-      <!-- 清除已完成 -->
-      <button class="clear-completed">Clear completed</button>
-    </footer>
+    <TodoHeader />
+    <TodoContent
+      :list="todoList"
+      @updateContent="updateTodo"
+      @deletTodo="deletTodo"
+      @changeTodo="changeTodo"
+    />
+    <TodoFooter />
   </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import TodoContent from './components/TodoContent.vue'
+import TodoFooter from './components/TodoFooter.vue'
+import TodoHeader from './components/TodoHeader.vue'
 // import Mock from 'mockjs'
 
 export default Vue.extend({
   name: 'Home',
-  components: {},
+  components: { TodoContent, TodoFooter, TodoHeader },
   data() {
-    return {}
+    return {
+      todoList: [
+        { id: 1, content: '按摩', done: true },
+        { id: 2, content: '吃饭', done: false },
+        { id: 3, content: '做饭', done: true }
+      ]
+    }
   },
   created() {},
   computed: {},
-  methods: {}
+  methods: {
+    updateTodo(id: number, content: string) {
+      console.log(content, id)
+      this.todoList.forEach((item) => {
+        if (item.id == id) {
+          item.content = content
+        }
+      })
+    },
+    deletTodo(id: number) {
+      this.todoList = this.todoList.filter((item) => item.id !== id)
+    },
+    changeTodo(id: number) {
+      this.todoList.forEach((item) => {
+        if (item.id === id) {
+          item.done = !item.done
+        }
+      })
+    }
+  }
 })
 </script>
 
