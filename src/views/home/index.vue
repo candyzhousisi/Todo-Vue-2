@@ -1,8 +1,6 @@
-im
-
 <template>
   <section class="todoapp">
-    <TodoHeader />
+    <TodoHeader @addTodo="addTodo" />
     <TodoContent
       :list="todoList"
       @updateContent="updateTodo"
@@ -19,6 +17,7 @@ import TodoContent from './components/TodoContent.vue'
 import TodoFooter from './components/TodoFooter.vue'
 import TodoHeader from './components/TodoHeader.vue'
 // import Mock from 'mockjs'
+import type { todolistType } from './types'
 
 export default Vue.extend({
   name: 'Home',
@@ -35,6 +34,14 @@ export default Vue.extend({
   created() {},
   computed: {},
   methods: {
+    addTodo(content: string) {
+      const obj: todolistType = {
+        id: Date.now(),
+        content,
+        done: false
+      }
+      this.todoList.unshift(obj)
+    },
     updateTodo(id: number, content: string) {
       console.log(content, id)
       this.todoList.forEach((item) => {
