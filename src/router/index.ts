@@ -6,11 +6,21 @@ Vue.use(VueRouter)
 const routes: RouteConfig[] = [
   {
     path: '/',
-    redirect: '/index'
+    redirect: '/all'
   },
   {
-    name: 'index',
-    path: '/index',
+    name: 'All',
+    path: '/all',
+    component: () => import('@/views/home/index.vue')
+  },
+  {
+    name: 'Active',
+    path: '/active',
+    component: () => import('@/views/home/index.vue')
+  },
+  {
+    name: 'Completed',
+    path: '/completed',
     component: () => import('@/views/home/index.vue')
   },
   {

@@ -2,12 +2,12 @@
   <section class="todoapp">
     <TodoHeader @addTodo="addTodo" />
     <TodoContent
-      :list="todoList"
+      :list="list"
       @updateContent="updateTodo"
       @deletTodo="deletTodo"
       @changeTodo="changeTodo"
     />
-    <TodoFooter />
+    <TodoFooter v-if="todoList.length" :count="count" @onClear="onClear" />
   </section>
 </template>
 
@@ -31,8 +31,27 @@ export default Vue.extend({
       ]
     }
   },
-  created() {},
-  computed: {},
+  created() {
+    console.log(this.$route.name)
+  },
+  computed: {
+    list() {
+      const arr = this.todoList as todolistType[]
+      switch (this.$route.name) {
+        case 'Active':
+          return arr.filter((item) => !item.done)
+        case 'Completed':
+          return arr.filter((item) => item.done)
+        default:
+          return arr
+      }
+    },
+
+    count() {
+      const arr = this.todoList as todolistType[]
+      return arr.filter((item) => !item.done).length
+    }
+  },
   methods: {
     addTodo(content: string) {
       const obj: todolistType = {
@@ -42,6 +61,7 @@ export default Vue.extend({
       }
       this.todoList.unshift(obj)
     },
+
     updateTodo(id: number, content: string) {
       console.log(content, id)
       this.todoList.forEach((item) => {
@@ -50,15 +70,21 @@ export default Vue.extend({
         }
       })
     },
+
     deletTodo(id: number) {
       this.todoList = this.todoList.filter((item) => item.id !== id)
     },
+
     changeTodo(id: number) {
       this.todoList.forEach((item) => {
         if (item.id === id) {
           item.done = !item.done
         }
       })
+    },
+
+    onClear() {
+      this.todoList = this.todoList.filter((item) => !item.done)
     }
   }
 })
