@@ -1,0 +1,103 @@
+{
+  "editor.fontSize": 20,
+  "explorer.confirmDelete": false,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "workbench.statusBar.visible": true,
+  "breadcrumbs.enabled": false,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.jsxSingleQuote": true,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "none",
+  "editor.formatOnSave": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    "*.js": "javascript",
+    "*.cjson": "jsonc",
+    "*.wxss": "css",
+    "*.wxs": "javascript",
+    ".env": "ini",
+    ".env.local": "ini",
+    ".env.dev.local": "ini",
+    ".env.development.local": "ini",
+    ".env.production.local": "ini",
+    "*.md": "markdown",
+    "*.tsx": "typescriptreact",
+    "*.jsx": "javascriptreact",
+    "*.vue": "vue"
+  },
+  "emmet.includeLanguages": {
+    "wxml": "html",
+    "xml": "html"
+  },
+  "minapp-vscode.disableAutoConfig": true,
+  "explorer.confirmDragAndDrop": false,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "files.eol": "\n",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.codeActionsOnSave.mode": "problems",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "cSpell.userWords": [
+    "commitlint",
+    "darkmode",
+    "eqeqeq",
+    "iconjiantou",
+    "jztv",
+    "lazyload",
+    "mockjs",
+    "nprogress",
+    "optimizelegibility",
+    "pinia",
+    "pxtorem",
+    "rushstack",
+    "stylelint",
+    "typecheck",
+    "vdom",
+    "vite",
+    "vitejs",
+    "vitest",
+    "vueuse"
+  ],
+  "source.fixAll.eslint": true,
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.guides.bracketPairs": true
+}
