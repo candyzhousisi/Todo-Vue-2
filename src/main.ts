@@ -1,20 +1,14 @@
-import Vue from 'vue'
-import router from './router'
-import store from '@/store'
-
-import 'animate.css'
-
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 
 import App from './App.vue'
+import router from './router'
 
-Vue.use(ElementUI)
+import './assets/main.css'
 
-console.warn(import.meta.env.MODE)
+const app = createApp(App)
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App)
-}).$mount('#app')
+app.use(createPinia())
+app.use(router)
+
+app.mount('#app')
