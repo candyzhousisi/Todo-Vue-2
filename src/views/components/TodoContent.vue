@@ -1,28 +1,77 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+type TodoType = {
+  id: number
+  content: string
+  done: boolean
+}
+
+withDefaults(
+  defineProps<{
+    list: TodoType[]
+  }>(),
+  {}
+)
+
+const checkedId = ref(-1)
+
+const inputValue = ref('')
+
+const emit = defineEmits(['deleteTodo', 'changeCheckbox', 'onBlur'])
+
+const dblclick = (id: number, content: string) => {
+  checkedId.value = id
+  inputValue.value = content
+}
+
+const onBlur = () => {
+  emit('onBlur', checkedId.value, inputValue.value)
+  checkedId.value = -1
+}
+const changeContent = (e: any) => {
+  e.target.blur()
+}
+</script>
 
 <template>
   <section class="main">
     <input id="toggle-all" class="toggle-all" type="checkbox" />
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
-      <!-- These are here just to show the structure of the list items -->
-      <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-      <li class="completed editing">
+      <li
+        v-for="item in list"
+        :key="item.id"
+        :class="{ completed: item.done, editing: checkedId === item.id }"
+      >
         <div class="view">
-          <input class="toggle" type="checkbox" />
-          <label>Buy a unicorn</label>
-          <button class="destroy"></button>
+          <input
+            class="toggle"
+            type="checkbox"
+            :checked="item.done"
+            @change="emit('changeCheckbox', item.id)"
+          />
+          <label @dblclick="dblclick(item.id, item.content)">{{ item.content }}</label>
+          <button class="destroy" @click="emit('deleteTodo', item.id)"></button>
         </div>
-        <input class="edit" type="text" />
+        <input
+          class="edit"
+          type="text"
+          v-focus
+          v-model="inputValue"
+          @blur="onBlur"
+          @keyup.enter="changeContent"
+        />
       </li>
-      <li>
+
+      <!-- <li>
         <div class="view">
           <input class="toggle" type="checkbox" />
           <label>Buy a unicorn</label>
           <button class="destroy"></button>
         </div>
         <input class="edit" value="Rule the web" />
-      </li>
+      </li> -->
     </ul>
   </section>
 </template>
