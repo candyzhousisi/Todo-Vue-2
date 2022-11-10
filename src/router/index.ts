@@ -6,7 +6,21 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      redirect: '/all'
+    },
+    {
+      path: '/all',
+      name: 'All',
+      component: HomeView
+    },
+    {
+      path: '/active',
+      name: 'Active',
+      component: HomeView
+    },
+    {
+      path: '/completed',
+      name: 'Completed',
       component: HomeView
     },
     {

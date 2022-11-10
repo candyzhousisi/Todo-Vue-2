@@ -1,32 +1,46 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterLink, useRoute } from 'vue-router'
+const list = [
+  {
+    to: '/all',
+    name: 'All'
+  },
+  {
+    to: '/active',
+    name: 'Active'
+  },
+  {
+    to: '/completed',
+    name: 'Completed'
+  }
+]
+
+defineProps({
+  count: {
+    type: Number,
+    required: true
+  }
+})
+
+const emit = defineEmits(['onClear'])
+</script>
 
 <template>
   <footer class="footer">
     <!-- 剩余完成数 -->
-    <span class="todo-count"><strong>0</strong> item left</span>
+    <span class="todo-count">
+      <strong>{{ count }}</strong>
+      <span> item left</span>
+    </span>
     <!-- 过滤是否完成任务 -->
     <ul class="filters">
-      <li>
-        <a class="selected" href="#/all">All</a>
-      </li>
-      <li>
-        <a href="#/active">Active</a>
-      </li>
-      <li>
-        <a href="#/completed">Completed</a>
+      <li v-for="item in list" :key="item.name">
+        <RouterLink :class="{ selected: useRoute().name === item.name }" :to="item.to">
+          <span>{{ item.name }}</span>
+        </RouterLink>
       </li>
     </ul>
     <!-- 清除已完成 -->
-    <button class="clear-completed">Clear completed</button>
+    <button class="clear-completed" @click="emit('onClear')">Clear completed</button>
   </footer>
 </template>
-
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
